@@ -13,7 +13,8 @@ class GroupController extends Controller
      */
     public function index()
     {
-        return view('groups.index');
+        $group =Group::all();
+        return view('groups.index', ['data'=>$group]);
     }
 
     /**
@@ -21,7 +22,7 @@ class GroupController extends Controller
      */
     public function create()
     {
-        //
+        return view('groups.create');
     }
 
     /**
@@ -29,7 +30,11 @@ class GroupController extends Controller
      */
     public function store(StoreGroupRequest $request)
     {
-        //
+        $group = new Group();
+        $group->name = $request->input('name');
+        $group -> save();
+
+        return redirect('/groups');
     }
 
     /**
@@ -37,7 +42,7 @@ class GroupController extends Controller
      */
     public function show(Group $group)
     {
-        //
+        
     }
 
     /**
@@ -45,7 +50,7 @@ class GroupController extends Controller
      */
     public function edit(Group $group)
     {
-        //
+        return view('groups.edit', ['group'=>$group]);
     }
 
     /**

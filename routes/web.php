@@ -19,3 +19,11 @@ Route::get('/', function () {
 });
 
 Route::get('/groups',[GroupController::class, 'index']);
+
+Route::get('/groups/create',[GroupController::class, 'create']);
+
+Route::post('/groups',[GroupController::class, 'store']);
+
+Route::get('/groups/{group}/edit',[GroupController::class, 'edit']);
+
+Route::put('/groups/{group}', [GroupController::class, 'update']);
