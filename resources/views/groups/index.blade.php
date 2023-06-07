@@ -37,5 +37,6 @@
     </div>
     <div class="block mt-5">
     {{ $data->links()}}
+
     </div>
 </x-layout>
