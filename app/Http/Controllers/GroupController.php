@@ -13,8 +13,8 @@ class GroupController extends Controller
      */
     public function index()
     {
-        $group =Group::all();
-        return view('groups.index', ['data'=>$group]);
+        $group = new Group;
+        return view('groups.index', ['data'=>$group->paginate(4)]);
     }
 
     /**
