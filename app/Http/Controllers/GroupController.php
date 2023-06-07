@@ -14,7 +14,7 @@ class GroupController extends Controller
     public function index()
     {
         $group = new Group;
-        return view('groups.index', ['data'=>$group->paginate(4)]);
+        return view('groups.index', ['data'=>$group->paginate(10)]);
     }
 
     /**
@@ -58,7 +58,12 @@ class GroupController extends Controller
      */
     public function update(UpdateGroupRequest $request, Group $group)
     {
-        //
+      
+        $group->name = $request->input('name');
+        $group->save();
+
+        return redirect('/groups');
+
     }
 
     /**

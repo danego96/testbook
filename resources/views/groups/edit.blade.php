@@ -3,7 +3,7 @@
     <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">Create Group</h1>
   
     <div class="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56 h-full">
-  <form action="/groups" method="POST">
+  <form action="/groups/{{$group->id}}" method="POST">
     @csrf
     @method('PUT')
     <h2 class="text-base font-semibold leading-7 text-gray-900">Edit Group</h2>
