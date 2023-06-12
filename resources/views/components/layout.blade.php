@@ -12,6 +12,7 @@
     <script src="//unpkg.com/alpinejs" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/datepicker.min.js"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -29,6 +30,7 @@
 <body>
     <section class="bg-white dark:bg-gray-900 h-full">
         <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-12 h-full">
+            <x-flash-message />
 {{$slot}}    
      
 

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GroupController;
+use App\Http\Controllers\StudentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,3 +28,11 @@ Route::post('/groups',[GroupController::class, 'store']);
 Route::get('/groups/{group}/edit',[GroupController::class, 'edit']);
 
 Route::put('/groups/{group}', [GroupController::class, 'update']);
+
+Route::delete('/groups/{group}', [GroupController::class, 'destroy']);
+
+Route::get('/students',[StudentController::class, 'index']);
+
+Route::get('/students/create',[StudentController::class, 'create']);
+
+Route::post('/students',[StudentController::class, 'store']);

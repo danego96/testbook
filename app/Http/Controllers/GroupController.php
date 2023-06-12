@@ -34,7 +34,7 @@ class GroupController extends Controller
         $group->name = $request->input('name');
         $group -> save();
 
-        return redirect('/groups');
+        return redirect('/groups')->with('success', 'Group added successfully');
     }
 
     /**
@@ -50,7 +50,7 @@ class GroupController extends Controller
      */
     public function edit(Group $group)
     {
-        return view('groups.edit', ['group'=>$group]);
+        return view('groups.edit', ['group'=>$group])->with('success', 'Group edited successfully');
     }
 
     /**
@@ -71,6 +71,8 @@ class GroupController extends Controller
      */
     public function destroy(Group $group)
     {
-        //
+        $group ->delete();
+
+        return  redirect('/groups')->with('error', 'Group deleted successfully');
     }
 }
