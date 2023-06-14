@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Group;
+use App\Models\Student;
 use App\Http\Requests\StoreGroupRequest;
 use App\Http\Requests\UpdateGroupRequest;
-use App\Models\Group;
 
 class GroupController extends Controller
 {
@@ -42,7 +43,9 @@ class GroupController extends Controller
      */
     public function show(Group $group)
     {
-        
+     
+        $student = Student::where('group_id', $group->id)->paginate(10);
+        return view('groups.show', ['group_data'=>$group->name, 'data'=>$student]);
     }
 
     /**
@@ -50,7 +53,7 @@ class GroupController extends Controller
      */
     public function edit(Group $group)
     {
-        return view('groups.edit', ['group'=>$group])->with('success', 'Group edited successfully');
+        return view('groups.edit', ['group'=>$group]);
     }
 
     /**
@@ -62,7 +65,7 @@ class GroupController extends Controller
         $group->name = $request->input('name');
         $group->save();
 
-        return redirect('/groups');
+        return redirect('/groups')->with('success', 'Group edited successfully');
 
     }
 

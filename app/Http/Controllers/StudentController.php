@@ -55,7 +55,8 @@ class StudentController extends Controller
      */
     public function edit(Student $student)
     {
-        //
+        $group = Group::all();
+        return view('students.edit', ['student'=>$student, 'data'=>$group]);
     }
 
     /**
@@ -63,7 +64,13 @@ class StudentController extends Controller
      */
     public function update(Request $request, Student $student)
     {
-        //
+        $student->name = $request->input('name');
+        $student->surname = $request->input('surname');
+        $student->birth_date = $request->input('birth_date');
+        $student->group_id = $request->input('group_id');
+        $student->save();
+
+        return redirect('/students')->with('success', 'Student details updated correctly');
     }
 
     /**
@@ -71,6 +78,8 @@ class StudentController extends Controller
      */
     public function destroy(Student $student)
     {
-        //
+        $student->delete();
+
+        return redirect('/students')->with('error', 'Student '. $student->name .' '. $student->surname . ' has been deleted');
     }
 }
