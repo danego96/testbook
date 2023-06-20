@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\SubjectController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,3 +45,9 @@ Route::put('/students/{student}', [StudentController::class, 'update']);
 Route::delete('/students/{student}', [StudentController::class, 'destroy']);
 
 Route::get('/groups/{group}', [GroupController::class, 'show']);
+
+Route::get('/subjects',[SubjectController::class, 'index']);
+
+Route::get('/subjects/create',[SubjectController::class, 'create']);
+
+Route::post('/subjects',[SubjectController::class, 'store']);
