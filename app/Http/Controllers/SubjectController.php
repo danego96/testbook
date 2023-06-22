@@ -49,7 +49,7 @@ class SubjectController extends Controller
      */
     public function edit(Subject $subject)
     {
-        //
+        return view('subjects.edit', ['subject'=>$subject]);
     }
 
     /**
@@ -57,7 +57,11 @@ class SubjectController extends Controller
      */
     public function update(Request $request, Subject $subject)
     {
-        //
+        $subject->name = $request->input('name');
+
+        $subject->update();
+
+        return redirect('/subjects')->with('success', 'Subject name has been successfully updated');
     }
 
     /**
@@ -65,6 +69,8 @@ class SubjectController extends Controller
      */
     public function destroy(Subject $subject)
     {
-        //
+        $subject ->delete();
+
+        return redirect('/subjects')->with('error', 'Subject ' .$subject->name. ' has been removed');
     }
 }

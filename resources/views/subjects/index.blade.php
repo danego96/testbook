@@ -28,7 +28,7 @@
                        {{$subject->name}}
                     </td>
                     <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-              <a href="/groups/{{$subject->id}}/edit">Edit</a> 
+              <a href="/subjects/{{$subject->id}}/edit">Edit</a> 
                       </td>
                 </tr>
                 @endforeach
@@ -36,7 +36,7 @@
         </table>
     </div>
     <div class="block mt-5">
-  {{--   {{ $data->links()}} --}}
+     {{ $data->links()}} 
 
     </div>
 </x-layout>

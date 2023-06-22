@@ -51,3 +51,9 @@ Route::get('/subjects',[SubjectController::class, 'index']);
 Route::get('/subjects/create',[SubjectController::class, 'create']);
 
 Route::post('/subjects',[SubjectController::class, 'store']);
+
+Route::get('/subjects/{subject}/edit',[SubjectController::class, 'edit']);
+
+Route::put('/subjects/{subject}', [SubjectController::class, 'update']);
+
+Route::delete('/subjects/{subject}', [SubjectController::class, 'destroy']);
