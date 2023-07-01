@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Group;
 use App\Models\Student;
+use App\Models\Subject;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
@@ -47,7 +48,11 @@ class StudentController extends Controller
      */
     public function show(Student $student)
     {
-        //
+        $subject = Subject::all();
+        $groups = Group::all();
+
+    return view('students.show', ['data'=>$subject, 'student'=>$student, 'groups'=>$groups]);
+        
     }
 
     /**
