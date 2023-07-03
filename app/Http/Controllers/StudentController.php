@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Mark;
 use App\Models\Group;
 use App\Models\Student;
 use App\Models\Subject;
@@ -50,8 +51,9 @@ class StudentController extends Controller
     {
         $subject = Subject::all();
         $groups = Group::all();
+        $mark = Mark::where('student_id', $student->id)->get();
 
-    return view('students.show', ['data'=>$subject, 'student'=>$student, 'groups'=>$groups]);
+    return view('students.show', ['data'=>$subject, 'student'=>$student, 'groups'=>$groups, 'marks'=>$mark]);
         
     }
 
@@ -60,6 +62,7 @@ class StudentController extends Controller
      */
     public function edit(Student $student)
     {
+       
         $group = Group::all();
         return view('students.edit', ['student'=>$student, 'data'=>$group]);
     }
