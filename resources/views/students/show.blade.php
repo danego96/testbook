@@ -39,7 +39,7 @@
                             @foreach ($marks as $mark)
                                 @if ($mark->subject_id == $subject->id)
                                     <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{ $mark->name }}
+                                     <a href="/students/{{$student->id}}/marks/{{$mark->id}}/edit">   {{ $mark->name }}</a>
                                     </td>
                                 @endif
                             @endforeach

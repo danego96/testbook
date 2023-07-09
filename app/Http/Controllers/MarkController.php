@@ -53,24 +53,36 @@ class MarkController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Mark $mark)
+    public function edit(Student $student, Mark $mark)
     {
-        //
+    
+
+        $markList = range(5,1);
+
+        return view('marks.edit', ['mark'=>$mark, 'student'=>$student,'markList'=>$markList] );
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Mark $mark)
+    public function update(Request $request, Student $student, Mark $mark)
     {
-        //
+
+        $mark->name = $request->input('name');
+
+
+        $mark->save();
+        return redirect('/students/' . $student->id)->with('success', 'Mark has been updated');
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Mark $mark)
+    public function destroy(Student $student, Mark $mark)
     {
-        //
+        $mark ->delete();
+
+        return redirect('/students/' . $student->id)->with('error', 'Mark has been deleted');
     }
 }

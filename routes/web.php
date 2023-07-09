@@ -64,3 +64,9 @@ Route::delete('/subjects/{subject}', [SubjectController::class, 'destroy']);
 Route::get('/students/{student}/marks/create',[MarkController::class, 'create']);
 
 Route::post('/students/{student}/marks',[MarkController::class, 'store']);
+
+Route::get('/students/{student}/marks/{mark}/edit',[MarkController::class, 'edit']);
+
+Route::put('/students/{student}/marks/{mark}', [MarkController::class, 'update']);
+
+Route::delete('/students/{student}/marks/{mark}', [MarkController::class, 'destroy']);
