@@ -7,6 +7,8 @@ use App\Models\Group;
 use App\Models\Student;
 use App\Models\Subject;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 class StudentController extends Controller
 {
@@ -52,8 +54,12 @@ class StudentController extends Controller
         $subject = Subject::all();
         $groups = Group::all();
         $mark = Mark::where('student_id', $student->id)->get();
+        $average = Mark::where('student_id', $student->id)
+        ->groupBy('subject_id')
+        ->select('subject_id', DB::raw('ROUND(AVG(name),1) as average'))
+        ->get();
 
-    return view('students.show', ['data'=>$subject, 'student'=>$student, 'groups'=>$groups, 'marks'=>$mark]);
+    return view('students.show', ['data'=>$subject, 'student'=>$student, 'groups'=>$groups, 'marks'=>$mark, 'average'=>$average]);
         
     }
 

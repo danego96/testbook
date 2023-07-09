@@ -28,6 +28,9 @@
                         <th scope="col" class="px-6 py-3">
                             Marks
                         </th>
+                        <th scope="col" class="px-6 py-3">
+                            Average
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -36,13 +39,21 @@
                             <th scope="row" class="px-6 py-4">
                                 {{ $subject->name }}
                             </th>
+                            <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                             @foreach ($marks as $mark)
                                 @if ($mark->subject_id == $subject->id)
-                                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                     <a href="/students/{{$student->id}}/marks/{{$mark->id}}/edit">   {{ $mark->name }}</a>
-                                    </td>
+                                        <a href="/students/{{ $student->id }}/marks/{{ $mark->id }}/edit">
+                                            {{ $mark->name }}</a>
                                 @endif
                             @endforeach
+                        </td>
+                            <th scope="row" class="px-6 py-4">
+                                @foreach ($average as $each_subject)
+                                    @if ($subject->id == $each_subject->subject_id)
+                                        {{ $each_subject->average }}
+                                    @endif
+                                @endforeach
+                            </th>
                         </tr>
                     @endforeach
                 </tbody>

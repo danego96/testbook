@@ -35,9 +35,9 @@ Route::delete('/groups/{group}', [GroupController::class, 'destroy']);
 
 Route::get('/students',[StudentController::class, 'index']);
 
-Route::get('/students/{student}',[StudentController::class, 'show']);
-
 Route::get('/students/create',[StudentController::class, 'create']);
+
+Route::get('/students/{student}',[StudentController::class, 'show']);
 
 Route::post('/students',[StudentController::class, 'store']);
 

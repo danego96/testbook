@@ -39,7 +39,8 @@ class MarkController extends Controller
 
         $mark->save();
 
-        return redirect('/students')->with('success', 'Mark has been added');
+        return redirect('/students/' . $student->id)->with('success', 'Mark has been updated');
+
     }
 
     /**
