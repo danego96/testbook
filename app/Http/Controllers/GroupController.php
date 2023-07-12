@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Mark;
 use App\Models\Group;
 use App\Models\Student;
+use App\Models\Subject;
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StoreGroupRequest;
 use App\Http\Requests\UpdateGroupRequest;
 
@@ -15,7 +18,7 @@ class GroupController extends Controller
     public function index()
     {
         $group = new Group;
-        return view('groups.index', ['data'=>$group->paginate(10)]);
+        return view('groups.index', ['data' => $group->paginate(10)]);
     }
 
     /**
@@ -33,7 +36,7 @@ class GroupController extends Controller
     {
         $group = new Group();
         $group->name = $request->input('name');
-        $group -> save();
+        $group->save();
 
         return redirect('/groups')->with('success', 'Group added successfully');
     }
@@ -43,9 +46,9 @@ class GroupController extends Controller
      */
     public function show(Group $group)
     {
-     
+
         $student = Student::where('group_id', $group->id)->paginate(10);
-        return view('groups.show', ['group_data'=>$group->name, 'data'=>$student]);
+        return view('groups.show', ['group_data' => $group->name, 'data' => $student, 'group' => $group]);
     }
 
     /**
@@ -53,7 +56,7 @@ class GroupController extends Controller
      */
     public function edit(Group $group)
     {
-        return view('groups.edit', ['group'=>$group]);
+        return view('groups.edit', ['group' => $group]);
     }
 
     /**
@@ -61,12 +64,11 @@ class GroupController extends Controller
      */
     public function update(UpdateGroupRequest $request, Group $group)
     {
-      
+
         $group->name = $request->input('name');
         $group->save();
 
         return redirect('/groups')->with('success', 'Group edited successfully');
-
     }
 
     /**
@@ -74,8 +76,28 @@ class GroupController extends Controller
      */
     public function destroy(Group $group)
     {
-        $group ->delete();
+        $group->delete();
 
         return  redirect('/groups')->with('error', 'Group deleted successfully');
+    }
+
+    public function show_table(Group $group)
+    {
+        $students = Student::where('group_id', $group->id)->paginate(10);
+        $subjects = Subject::all();
+        
+        $studentIds = $students->pluck('id');
+        $average_marks = Mark::whereIn('student_id', $studentIds)
+            ->groupBy(['student_id', 'subject_id'])
+            ->select('student_id', 'subject_id', DB::raw('ROUND(AVG(name),1) as average'))
+            ->get();
+
+        $averageTotalMarks = Mark::whereIn('student_id', $studentIds)
+        ->groupBy('student_id')
+        ->select('student_id', DB::raw('ROUND(AVG(name),1) as average'))
+        ->get();
+        
+        return view('groups.show_table', compact('group', 'students', 'subjects', 'average_marks', 'averageTotalMarks'));
+ 
     }
 }

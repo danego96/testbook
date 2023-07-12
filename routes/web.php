@@ -70,3 +70,5 @@ Route::get('/students/{student}/marks/{mark}/edit',[MarkController::class, 'edit
 Route::put('/students/{student}/marks/{mark}', [MarkController::class, 'update']);
 
 Route::delete('/students/{student}/marks/{mark}', [MarkController::class, 'destroy']);
+
+Route::get('/groups/{group}/table', [GroupController::class, 'show_table']);
