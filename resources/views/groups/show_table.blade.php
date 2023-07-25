@@ -3,12 +3,12 @@
 
 
     <div class="relative overflow-x-auto">
-        <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-4xl dark:text-white">
+        <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-4xl">
             {{ $group->name }} information </h1>
 
 
-<table class="w-full mt-5 text-sm text-left text-gray-500 dark:text-gray-400">
-    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+<table class="w-full mt-5 text-sm text-left text-gray-500">
+    <thead class="text-xs text-gray-700 uppercase bg-gray-50">
         <tr>
             <th scope="col" class="px-5 py-3">
                 Student
@@ -27,7 +27,7 @@
     <tbody>
         @foreach ($students as $student)
  
-        <tr class="bg-white  border-b dark:bg-800 dark:border-gray-700">
+        <tr class="bg-white  border-b">
             @foreach ($averageTotalMarks as $averageEachMark)
             @if ($averageEachMark->student_id == $student->id)
             <th scope="row" class="px-6 py-4 @if($averageEachMark->average == '5.0') text-red-600 @endif">

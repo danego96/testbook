@@ -2,7 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MarkController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\GroupController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
 
@@ -19,7 +21,10 @@ use App\Http\Controllers\SubjectController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
+
+
+
 
 Route::get('/groups',[GroupController::class, 'index']);
 
@@ -72,3 +77,10 @@ Route::put('/students/{student}/marks/{mark}', [MarkController::class, 'update']
 Route::delete('/students/{student}/marks/{mark}', [MarkController::class, 'destroy']);
 
 Route::get('/groups/{group}/table', [GroupController::class, 'show_table']);
+
+Route::get('/register', [UserController::class, 'create']);
+
+Route::post('/users', [UserController::class, 'store']);
+
+Route::post('/logout', [UserController::class, 'logout']);
+
