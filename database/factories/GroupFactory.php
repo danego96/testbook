@@ -2,8 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Models\Group;
-use Faker\Core\Number;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,11 +17,11 @@ class GroupFactory extends Factory
     public function definition(): array
     {
         static $groupNumber = 1;
-        $groupName = 'Group ' . $groupNumber;
-        $groupNumber++; 
+        $groupName = 'Group '.$groupNumber;
+        $groupNumber++;
 
         return [
-            'name' => $groupName
+            'name' => $groupName,
         ];
     }
 }

@@ -1,12 +1,11 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\MarkController;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\GroupController;
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\MarkController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,9 +21,6 @@ use App\Http\Controllers\SubjectController;
 Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
-
-
-
 
 Route::get('/groups', [GroupController::class, 'index']);
 

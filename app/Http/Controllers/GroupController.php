@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Mark;
+use App\Http\Requests\StoreGroupRequest;
+use App\Http\Requests\UpdateGroupRequest;
 use App\Models\Group;
+use App\Models\Mark;
 use App\Models\Student;
 use App\Models\Subject;
 use Illuminate\Support\Facades\DB;
-use App\Http\Requests\StoreGroupRequest;
-use App\Http\Requests\UpdateGroupRequest;
 
 class GroupController extends Controller
 {
@@ -18,6 +18,7 @@ class GroupController extends Controller
     public function index()
     {
         $group = new Group;
+
         return view('groups.index', ['data' => $group->paginate(10)]);
     }
 
@@ -48,6 +49,7 @@ class GroupController extends Controller
     {
 
         $student = Student::where('group_id', $group->id)->paginate(10);
+
         return view('groups.show', ['group_data' => $group->name, 'data' => $student, 'group' => $group]);
     }
 
@@ -78,14 +80,14 @@ class GroupController extends Controller
     {
         $group->delete();
 
-        return  redirect('/groups')->with('error', 'Group deleted successfully');
+        return redirect('/groups')->with('error', 'Group deleted successfully');
     }
 
     public function show_table(Group $group)
     {
         $students = Student::where('group_id', $group->id)->paginate(10);
         $subjects = Subject::all();
-        
+
         $studentIds = $students->pluck('id');
         $average_marks = Mark::whereIn('student_id', $studentIds)
             ->groupBy(['student_id', 'subject_id'])
@@ -93,11 +95,11 @@ class GroupController extends Controller
             ->get();
 
         $averageTotalMarks = Mark::whereIn('student_id', $studentIds)
-        ->groupBy('student_id')
-        ->select('student_id', DB::raw('ROUND(AVG(name),1) as average'))
-        ->get();
-        
+            ->groupBy('student_id')
+            ->select('student_id', DB::raw('ROUND(AVG(name),1) as average'))
+            ->get();
+
         return view('groups.show_table', compact('group', 'students', 'subjects', 'average_marks', 'averageTotalMarks'));
- 
+
     }
 }

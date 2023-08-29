@@ -22,9 +22,10 @@ class MarkController extends Controller
      */
     public function create(Student $student)
     {
-        $mark = range(5,1);
+        $mark = range(5, 1);
         $subject = Subject::all();
-        return view('marks.create', ['data'=>$subject, 'marks'=>$mark, 'student'=>$student]);
+
+        return view('marks.create', ['data' => $subject, 'marks' => $mark, 'student' => $student]);
     }
 
     /**
@@ -32,14 +33,14 @@ class MarkController extends Controller
      */
     public function store(Request $request, Student $student)
     {
-        $mark= new Mark();
+        $mark = new Mark();
         $mark->name = $request->input('name');
         $mark->subject_id = $request->input('subject_id');
         $mark->student_id = $student->id;
 
         $mark->save();
 
-        return redirect('/students/' . $student->id)->with('success', 'Mark has been updated');
+        return redirect('/students/'.$student->id)->with('success', 'Mark has been updated');
 
     }
 
@@ -56,11 +57,10 @@ class MarkController extends Controller
      */
     public function edit(Student $student, Mark $mark)
     {
-    
 
-        $markList = range(5,1);
+        $markList = range(5, 1);
 
-        return view('marks.edit', ['mark'=>$mark, 'student'=>$student,'markList'=>$markList] );
+        return view('marks.edit', ['mark' => $mark, 'student' => $student, 'markList' => $markList]);
     }
 
     /**
@@ -71,9 +71,9 @@ class MarkController extends Controller
 
         $mark->name = $request->input('name');
 
-
         $mark->save();
-        return redirect('/students/' . $student->id)->with('success', 'Mark has been updated');
+
+        return redirect('/students/'.$student->id)->with('success', 'Mark has been updated');
 
     }
 
@@ -82,8 +82,8 @@ class MarkController extends Controller
      */
     public function destroy(Student $student, Mark $mark)
     {
-        $mark ->delete();
+        $mark->delete();
 
-        return redirect('/students/' . $student->id)->with('error', 'Mark has been deleted');
+        return redirect('/students/'.$student->id)->with('error', 'Mark has been deleted');
     }
 }

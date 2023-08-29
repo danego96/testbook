@@ -13,6 +13,7 @@ class SubjectController extends Controller
     public function index()
     {
         $subject = new Subject;
+
         return view('subjects.index', ['data' => $subject->paginate(10)]);
     }
 
@@ -29,11 +30,11 @@ class SubjectController extends Controller
      */
     public function store(Request $request)
     {
-      $subject = new Subject();
-      $subject->name =$request->input('name');
-      $subject -> save();
+        $subject = new Subject();
+        $subject->name = $request->input('name');
+        $subject->save();
 
-      return redirect('/subjects');
+        return redirect('/subjects');
     }
 
     /**
@@ -49,7 +50,7 @@ class SubjectController extends Controller
      */
     public function edit(Subject $subject)
     {
-        return view('subjects.edit', ['subject'=>$subject]);
+        return view('subjects.edit', ['subject' => $subject]);
     }
 
     /**
@@ -69,8 +70,8 @@ class SubjectController extends Controller
      */
     public function destroy(Subject $subject)
     {
-        $subject ->delete();
+        $subject->delete();
 
-        return redirect('/subjects')->with('error', 'Subject ' .$subject->name. ' has been removed');
+        return redirect('/subjects')->with('error', 'Subject '.$subject->name.' has been removed');
     }
 }

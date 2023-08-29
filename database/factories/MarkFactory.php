@@ -19,9 +19,9 @@ class MarkFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->numberBetween(1,5),
+            'name' => $this->faker->numberBetween(1, 5),
             'student_id' => Student::get()->random()->id,
-            'subject_id' => Subject::get()->random()->id
+            'subject_id' => Subject::get()->random()->id,
         ];
     }
 }

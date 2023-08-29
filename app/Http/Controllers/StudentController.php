@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Mark;
 use App\Models\Group;
+use App\Models\Mark;
 use App\Models\Student;
 use App\Models\Subject;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
 
 class StudentController extends Controller
 {
@@ -19,7 +18,8 @@ class StudentController extends Controller
     {
         $student = new Student;
         $group = Group::all();
-        return view('students.index', ['data'=>$student->paginate(10), 'group_data'=>$group]);
+
+        return view('students.index', ['data' => $student->paginate(10), 'group_data' => $group]);
     }
 
     /**
@@ -28,7 +28,8 @@ class StudentController extends Controller
     public function create()
     {
         $group = Group::all();
-        return view('students.create',['data'=>$group]);
+
+        return view('students.create', ['data' => $group]);
     }
 
     /**
@@ -41,7 +42,7 @@ class StudentController extends Controller
         $student->surname = $request->input('surname');
         $student->birth_date = $request->input('birth_date');
         $student->group_id = $request->input('group_id');
-        $student -> save();
+        $student->save();
 
         return redirect('/students');
     }
@@ -55,12 +56,12 @@ class StudentController extends Controller
         $groups = Group::all();
         $mark = Mark::where('student_id', $student->id)->get();
         $average = Mark::where('student_id', $student->id)
-        ->groupBy('subject_id')
-        ->select('subject_id', DB::raw('ROUND(AVG(name),1) as average'))
-        ->get();
+            ->groupBy('subject_id')
+            ->select('subject_id', DB::raw('ROUND(AVG(name),1) as average'))
+            ->get();
 
-    return view('students.show', ['data'=>$subject, 'student'=>$student, 'groups'=>$groups, 'marks'=>$mark, 'average'=>$average]);
-        
+        return view('students.show', ['data' => $subject, 'student' => $student, 'groups' => $groups, 'marks' => $mark, 'average' => $average]);
+
     }
 
     /**
@@ -68,9 +69,10 @@ class StudentController extends Controller
      */
     public function edit(Student $student)
     {
-       
+
         $group = Group::all();
-        return view('students.edit', ['student'=>$student, 'data'=>$group]);
+
+        return view('students.edit', ['student' => $student, 'data' => $group]);
     }
 
     /**
@@ -94,6 +96,6 @@ class StudentController extends Controller
     {
         $student->delete();
 
-        return redirect('/students')->with('error', 'Student '. $student->name .' '. $student->surname . ' has been deleted');
+        return redirect('/students')->with('error', 'Student '.$student->name.' '.$student->surname.' has been deleted');
     }
 }
