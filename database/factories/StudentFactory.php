@@ -19,9 +19,11 @@ class StudentFactory extends Factory
     {
 
         return [
-            'name' => $this->faker->firstName(),
-            'surname' => $this->faker->lastName(),
+            'first_name' => $this->faker->firstName(),
+            'last_name' => $this->faker->lastName(),
             'birth_date' => $this->faker->date('Y-m-d', '2004-01-01'),
+            'email'  => $this->faker->email(),
+            'password'  => $this->faker->password(),
             'group_id' => Group::get()->random()->id,
 
         ];

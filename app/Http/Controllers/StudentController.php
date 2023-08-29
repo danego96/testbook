@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Group;
 use App\Models\Mark;
+use App\Models\Group;
 use App\Models\Student;
 use App\Models\Subject;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
@@ -37,14 +38,24 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        $student = new Student();
-        $student->name = $request->input('name');
-        $student->surname = $request->input('surname');
-        $student->birth_date = $request->input('birth_date');
-        $student->group_id = $request->input('group_id');
-        $student->save();
 
-        return redirect('/students');
+        $formFields = $request->validate([
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email' => ['required', 'email', Rule::unique('users', 'email')],
+            'birth_date' => 'required',
+            'group_id' => 'required',
+            'password' => ['required', 'confirmed'],
+
+        ]);
+
+        $formFields['password'] = bcrypt($formFields['password']);
+
+        $user = Student::create($formFields);
+
+        auth()->login($user);
+
+        return redirect('/')->with('success', 'User has been created');
     }
 
     /**
@@ -97,5 +108,42 @@ class StudentController extends Controller
         $student->delete();
 
         return redirect('/students')->with('error', 'Student '.$student->name.' '.$student->surname.' has been deleted');
+    }
+
+    public function register()
+    {
+        $group = Group::all();
+
+        return view('users.register', ['data' => $group]);
+    }
+
+    public function logout(Request $request)
+    {
+        auth()->logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/')->with('success', 'User has been logged out');
+    }
+
+    public function login()
+    {
+        return view('users.login');
+    }
+
+    public function authanticate(Request $request)
+    {
+
+        $formFields = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => 'required',
+
+        ]);
+        if (auth()->attempt($formFields)) {
+            $request->session()->regenerate();
+        }
+
+        return redirect('/')->with('success', 'User has been logged in');
     }
 }

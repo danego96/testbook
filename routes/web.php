@@ -74,12 +74,10 @@ Route::delete('/students/{student}/marks/{mark}', [MarkController::class, 'destr
 
 Route::get('/groups/{group}/table', [GroupController::class, 'show_table']);
 
-Route::get('/register', [UserController::class, 'create']);
+Route::get('/register', [StudentController::class, 'register']);
 
-Route::post('/users', [UserController::class, 'store']);
+Route::post('/logout', [StudentController::class, 'logout']);
 
-Route::post('/logout', [UserController::class, 'logout']);
+Route::get('/login', [StudentController::class, 'login'])->name('login');
 
-Route::get('/login', [UserController::class, 'login'])->name('login');
-
-Route::post('/users/authanticate', [UserController::class, 'authanticate']);
+Route::post('/students/authanticate', [StundentController::class, 'authanticate']);

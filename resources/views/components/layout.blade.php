@@ -28,7 +28,7 @@
 </head>
 
 <body>
-    <section class="bg-white h-full">
+    <section class="bg-white h-full mx-2">
         <div class="py-8 h-full">
             <x-flash-message />
 {{$slot}}    

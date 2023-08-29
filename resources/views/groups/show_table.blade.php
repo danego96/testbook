@@ -26,35 +26,45 @@
     </thead>
     <tbody>
         @foreach ($students as $student)
- 
         <tr class="bg-white  border-b">
-            @foreach ($averageTotalMarks as $averageEachMark)
-            @if ($averageEachMark->student_id == $student->id)
-            <th scope="row" class="px-6 py-4 @if($averageEachMark->average == '5.0') text-red-600 @endif">
-                
-                {{ $student->name }} {{ $student->surname }} 
-
-            </th>
-@endif
-@endforeach
-            @foreach ($subjects as $subject)
-            <td class="px-6 py-4">
-                @foreach ($average_marks as $average)
-                @if ($average->subject_id == $subject->id && $average->student_id == $student->id)
-                {{ $average->average }}
-                @endif
+            <th scope="row" class="px-6 py-4
+                @foreach ($averageTotalMarks as $averageEachMark)
+                    @if ($averageEachMark->student_id == $student->id)
+                        @if ($averageEachMark->average === null)
+                            text-black-600
+                        @elseif ($averageEachMark->average == '5.0')
+                            text-green-600
+                        @elseif ($averageEachMark->average >= '4.0' && $averageEachMark->average < '5.0')
+                            text-yellow-600
+                        @elseif ($averageEachMark->average < '4.0')
+                            text-red-600
+                        @endif
+                    @endif
                 @endforeach
-            </td>
+            ">
+                {{ $student->name }} {{ $student->surname }}
+            </th>
+            
+            @foreach ($subjects as $subject)
+                <td class="px-6 py-4">
+                    @foreach ($average_marks as $average)
+                        @if ($average->subject_id == $subject->id && $average->student_id == $student->id)
+                            {{ $average->average }}
+                        @endif
+                    @endforeach
+                </td>
             @endforeach
+    
             <td class="px-6 py-4">
                 @foreach ($averageTotalMarks as $averageEachMark)
-                @if ($averageEachMark->student_id == $student->id)
-                {{$averageEachMark->average}}
-                @endif
+                    @if ($averageEachMark->student_id == $student->id)
+                        {{$averageEachMark->average}}
+                    @endif
                 @endforeach
             </td>
         </tr>
-        @endforeach
+    @endforeach
+    
     </tbody>
 </table>
 

@@ -20,6 +20,7 @@ class UserController extends Controller
             'last_name' => 'required',
             'email' => ['required', 'email', Rule::unique('users', 'email')],
             'password' => ['required', 'confirmed'],
+            'role' => 'required',
 
         ]);
 
