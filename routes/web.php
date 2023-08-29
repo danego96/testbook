@@ -26,55 +26,55 @@ Route::get('/', function () {
 
 
 
-Route::get('/groups',[GroupController::class, 'index']);
+Route::get('/groups', [GroupController::class, 'index']);
 
-Route::get('/groups/create',[GroupController::class, 'create']);
+Route::get('/groups/create', [GroupController::class, 'create'])->middleware('auth');
 
-Route::post('/groups',[GroupController::class, 'store']);
+Route::post('/groups', [GroupController::class, 'store']);
 
-Route::get('/groups/{group}/edit',[GroupController::class, 'edit']);
+Route::get('/groups/{group}/edit', [GroupController::class, 'edit'])->middleware('auth');
 
 Route::put('/groups/{group}', [GroupController::class, 'update']);
 
-Route::delete('/groups/{group}', [GroupController::class, 'destroy']);
+Route::delete('/groups/{group}', [GroupController::class, 'destroy'])->middleware('auth');
 
-Route::get('/students',[StudentController::class, 'index']);
+Route::get('/students', [StudentController::class, 'index']);
 
-Route::get('/students/create',[StudentController::class, 'create']);
+Route::get('/students/create', [StudentController::class, 'create'])->middleware('auth');
 
-Route::get('/students/{student}',[StudentController::class, 'show']);
+Route::get('/students/{student}', [StudentController::class, 'show']);
 
-Route::post('/students',[StudentController::class, 'store']);
+Route::post('/students', [StudentController::class, 'store']);
 
-Route::get('/students/{student}/edit',[StudentController::class, 'edit']);
+Route::get('/students/{student}/edit', [StudentController::class, 'edit'])->middleware('auth');
 
 Route::put('/students/{student}', [StudentController::class, 'update']);
 
-Route::delete('/students/{student}', [StudentController::class, 'destroy']);
+Route::delete('/students/{student}', [StudentController::class, 'destroy'])->middleware('auth');
 
 Route::get('/groups/{group}', [GroupController::class, 'show']);
 
-Route::get('/subjects',[SubjectController::class, 'index']);
+Route::get('/subjects', [SubjectController::class, 'index']);
 
-Route::get('/subjects/create',[SubjectController::class, 'create']);
+Route::get('/subjects/create', [SubjectController::class, 'create'])->middleware('auth');
 
-Route::post('/subjects',[SubjectController::class, 'store']);
+Route::post('/subjects', [SubjectController::class, 'store']);
 
-Route::get('/subjects/{subject}/edit',[SubjectController::class, 'edit']);
+Route::get('/subjects/{subject}/edit', [SubjectController::class, 'edit'])->middleware('auth');
 
 Route::put('/subjects/{subject}', [SubjectController::class, 'update']);
 
-Route::delete('/subjects/{subject}', [SubjectController::class, 'destroy']);
+Route::delete('/subjects/{subject}', [SubjectController::class, 'destroy'])->middleware('auth');
 
-Route::get('/students/{student}/marks/create',[MarkController::class, 'create']);
+Route::get('/students/{student}/marks/create', [MarkController::class, 'create']);
 
-Route::post('/students/{student}/marks',[MarkController::class, 'store']);
+Route::post('/students/{student}/marks', [MarkController::class, 'store']);
 
-Route::get('/students/{student}/marks/{mark}/edit',[MarkController::class, 'edit']);
+Route::get('/students/{student}/marks/{mark}/edit', [MarkController::class, 'edit'])->middleware('auth');
 
 Route::put('/students/{student}/marks/{mark}', [MarkController::class, 'update']);
 
-Route::delete('/students/{student}/marks/{mark}', [MarkController::class, 'destroy']);
+Route::delete('/students/{student}/marks/{mark}', [MarkController::class, 'destroy'])->middleware('auth');
 
 Route::get('/groups/{group}/table', [GroupController::class, 'show_table']);
 
@@ -84,7 +84,6 @@ Route::post('/users', [UserController::class, 'store']);
 
 Route::post('/logout', [UserController::class, 'logout']);
 
-Route::get('/login', [UserController::class, 'login']);
+Route::get('/login', [UserController::class, 'login'])->name('login');
 
 Route::post('/users/authanticate', [UserController::class, 'authanticate']);
-
