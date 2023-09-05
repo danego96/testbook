@@ -31,7 +31,7 @@
                         {{$student->id}}
                     </th>
                     <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                        <a href="/students/{{$student ->id}}">{{$student->name}} {{$student->surname}}</a>
+                        <a href="/students/{{$student ->id}}">{{$student->first_name}} {{$student->last_name}}</a>
                     </td>
                     <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                         {{$group_data}}

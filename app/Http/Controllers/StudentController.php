@@ -91,8 +91,8 @@ class StudentController extends Controller
      */
     public function update(Request $request, Student $student)
     {
-        $student->name = $request->input('name');
-        $student->surname = $request->input('surname');
+        $student->first_name = $request->input('first_name');
+        $student->last_name = $request->input('last_name');
         $student->birth_date = $request->input('birth_date');
         $student->group_id = $request->input('group_id');
         $student->save();

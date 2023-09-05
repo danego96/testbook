@@ -42,7 +42,7 @@
                     @endif
                 @endforeach
             ">
-                {{ $student->name }} {{ $student->surname }}
+                {{ $student->first_name }} {{ $student->last_name }}
             </th>
             
             @foreach ($subjects as $subject)
