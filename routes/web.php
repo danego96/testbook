@@ -80,4 +80,6 @@ Route::post('/logout', [StudentController::class, 'logout']);
 
 Route::get('/login', [StudentController::class, 'login'])->name('login');
 
-Route::post('/students/authanticate', [StundentController::class, 'authanticate']);
+Route::post('/students/authenticate', [StudentController::class, 'authenticate']);
+
+Route::get('students/{student}/profile', [StudentController::class, 'view_profile'])->name('profile');

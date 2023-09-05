@@ -39,6 +39,7 @@ class StudentController extends Controller
     public function store(Request $request)
     {
 
+        $group = Group::all();
         $formFields = $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
@@ -55,7 +56,7 @@ class StudentController extends Controller
 
         auth()->login($user);
 
-        return redirect('/')->with('success', 'User has been created');
+        return redirect()->route('profile', ['student' => auth()->user(), 'data' => $group])->with('success', 'User has been created');
     }
 
     /**
@@ -72,7 +73,6 @@ class StudentController extends Controller
             ->get();
 
         return view('students.show', ['data' => $subject, 'student' => $student, 'groups' => $groups, 'marks' => $mark, 'average' => $average]);
-
     }
 
     /**
@@ -107,7 +107,7 @@ class StudentController extends Controller
     {
         $student->delete();
 
-        return redirect('/students')->with('error', 'Student '.$student->name.' '.$student->surname.' has been deleted');
+        return redirect('/students')->with('error', 'Student ' . $student->name . ' ' . $student->surname . ' has been deleted');
     }
 
     public function register()
@@ -132,8 +132,9 @@ class StudentController extends Controller
         return view('users.login');
     }
 
-    public function authanticate(Request $request)
+    public function authenticate(Request $request)
     {
+        $group = Group::all();
 
         $formFields = $request->validate([
             'email' => ['required', 'email'],
@@ -144,6 +145,14 @@ class StudentController extends Controller
             $request->session()->regenerate();
         }
 
-        return redirect('/')->with('success', 'User has been logged in');
+        return redirect()->route('profile', ['student' => auth()->user(), 'data' => $group])->with('success', 'User has been logged in');
+        
+    }
+
+    public function view_profile(Student $student)
+    {
+
+        $group = Group::all();
+        return view('students.profile', ['student' => $student, 'data' => $group]);
     }
 }
