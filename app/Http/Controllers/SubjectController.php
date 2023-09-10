@@ -12,9 +12,9 @@ class SubjectController extends Controller
      */
     public function index()
     {
-        $subject = new Subject;
+        $subject = Subject::filter()->paginate(10);
 
-        return view('subjects.index', ['data' => $subject->paginate(10)]);
+        return view('subjects.index', ['data' => $subject]);
     }
 
     /**
