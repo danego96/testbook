@@ -15,9 +15,16 @@ class StudentController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $student = new Student;
+
+        $student = Student::query();
+
+        match ($request->SortBy) {
+            'name' => $student->orderBy('last_name', 'asc'),
+            'birth_date' => $student->orderBy('birth_date', 'asc'),
+            default => $student->orderBy('id', 'asc'),
+        };
         $group = Group::all();
 
         return view('students.index', ['data' => $student->paginate(10), 'group_data' => $group]);
@@ -146,7 +153,6 @@ class StudentController extends Controller
         }
 
         return redirect()->route('profile', ['student' => auth()->user(), 'data' => $group])->with('success', 'User has been logged in');
-        
     }
 
     public function view_profile(Student $student)

@@ -17,7 +17,7 @@ class Subject extends Model
     }
 
 
-    public function scopeFilter(Builder $query): void
+    public function scopeSortable(Builder $query): void
     {
         $query->orderby('name', 'asc');
     }

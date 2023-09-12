@@ -34,7 +34,7 @@ Route::put('/groups/{group}', [GroupController::class, 'update']);
 
 Route::delete('/groups/{group}', [GroupController::class, 'destroy'])->middleware('auth');
 
-Route::get('/students', [StudentController::class, 'index']);
+Route::get('/students', [StudentController::class, 'index'])->name('students');
 
 Route::get('/students/create', [StudentController::class, 'create'])->middleware('auth');
 
