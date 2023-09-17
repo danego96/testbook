@@ -7,7 +7,7 @@
                 <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                     Create an account
                 </h1>
-                <form class="space-y-4 md:space-y-6" method="POST" action="/students">
+                <form class="space-y-4 md:space-y-6" method="POST" action="/students" enctype="multipart/form-data">
                     @csrf
                     <div>
                         <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your name</label>
@@ -62,6 +62,10 @@
                     </select>
                        </div>
                     </div>
+                    <div class="mb-6">
+                        <label for="image" class="block mb-2 text-sm font-medium text-gray-900">Student photo</label>
+                        <input type="file" name="image" id="image" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Add student photo">
+                      </div>
                     <button type="submit" class="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Create an account</button>
 
                     <p class="w-full px-5 py-2.5 text-sm font-light text-gray-500 dark:text-gray-400">

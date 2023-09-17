@@ -31,6 +31,7 @@ class Student extends Authenticatable
         'birth_date',
         'group_id',
         'password',
+        'image',
     ];
 
     /**

@@ -9,6 +9,7 @@ use App\Models\Subject;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class StudentController extends Controller
 {
@@ -57,6 +58,15 @@ class StudentController extends Controller
 
         ]);
 
+        if($request->hasFile('image')){
+            $imagePath = $request->file('image')->store('images', 'public');
+            if (!$imagePath) {
+                return redirect()->back()->with('error', 'Failed to upload image.');
+            }
+            $formFields ['image'] = $request ->file('image')->store('images', 'public');
+        }
+          
+
         $formFields['password'] = bcrypt($formFields['password']);
 
         $user = Student::create($formFields);
@@ -102,6 +112,15 @@ class StudentController extends Controller
         $student->last_name = $request->input('last_name');
         $student->birth_date = $request->input('birth_date');
         $student->group_id = $request->input('group_id');
+        if ($request->hasFile('image')) {
+            if ($student->image) {
+                Storage::disk('public')->delete($student->image);
+            }
+            
+            // Сохраните новое изображение
+            $imagePath = $request->file('image')->store('images', 'public');
+            $student->image = $imagePath;
+        }
         $student->save();
 
         return redirect('/students')->with('success', 'Student details updated correctly');
