@@ -116,8 +116,6 @@ class StudentController extends Controller
             if ($student->image) {
                 Storage::disk('public')->delete($student->image);
             }
-            
-            // Сохраните новое изображение
             $imagePath = $request->file('image')->store('images', 'public');
             $student->image = $imagePath;
         }
