@@ -4,10 +4,13 @@
         <h1
             class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-4xl">
             Student information </h1>
+
+            <img src="{{$student->image ? asset('storage/'.$student->image) : asset('images/no-image.jpg')}}">
+
         @foreach ($groups as $group)
             <p class="mb-3 text-gray-500"
-                @if ($student->group_id == $group->id) value="{{ $group->group_id }}"> Name: {{ $student->name }}  <br>
-           Last name:  {{ $student->surname }} <br>
+                @if ($student->group_id == $group->id) value="{{ $group->group_id }}"> Name: {{ $student->first_name }}  <br>
+           Last name:  {{ $student->last_name }} <br>
            Birth date:  {{ $student->birth_date }} <br>
            Group: {{ $group->name }}</p> @endif
                 @endforeach

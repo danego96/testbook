@@ -4,6 +4,7 @@
 
   <div class="mx-auto max-w-2xl py-32   h-full">
 <form action="/students/{{$student->id}}" method="POST" enctype="multipart/form-data">
+ <img src="{{$student->image ? asset('storage/'.$student->image) : asset('storage/no-image.jpg')}}">
     @csrf
     @method('PUT')
   <div class="mb-6">
