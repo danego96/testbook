@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreGroupRequest;
-use App\Http\Requests\UpdateGroupRequest;
+use App\Http\Requests\GroupRequest;
 use App\Models\Group;
 use App\Models\Mark;
 use App\Models\Student;
@@ -33,7 +32,7 @@ class GroupController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreGroupRequest $request)
+    public function store(GroupRequest $request)
     {
         $group = new Group();
         $group->name = $request->input('name');
@@ -64,7 +63,7 @@ class GroupController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(StoreGroupRequest $request, Group $group)
+    public function update(GroupRequest $request, Group $group)
     {
 
         $group->name = $request->input('name');
