@@ -39,7 +39,7 @@ class GroupController extends Controller
         $group->name = $request->input('name');
         $group->save();
 
-        return redirect('/groups')->with('success', 'Group added successfully');
+        return redirect('groups')->with('success', 'Group added successfully');
     }
 
     /**
@@ -64,13 +64,13 @@ class GroupController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateGroupRequest $request, Group $group)
+    public function update(StoreGroupRequest $request, Group $group)
     {
 
         $group->name = $request->input('name');
         $group->save();
 
-        return redirect('/groups')->with('success', 'Group edited successfully');
+        return redirect('group')->with('success', 'Group edited successfully');
     }
 
     /**
@@ -80,7 +80,7 @@ class GroupController extends Controller
     {
         $group->delete();
 
-        return redirect('/groups')->with('error', 'Group deleted successfully');
+        return redirect('groups')->with('error', 'Group deleted successfully');
     }
 
     public function show_table(Group $group)

@@ -22,7 +22,7 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
-Route::get('/groups', [GroupController::class, 'index']);
+Route::get('/groups', [GroupController::class, 'index'])->name('groups');
 
 Route::get('/groups/create', [GroupController::class, 'create'])->middleware('auth');
 
