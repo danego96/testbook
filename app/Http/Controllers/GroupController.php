@@ -19,7 +19,7 @@ class GroupController extends Controller
     {
         $groups = Group::sortable()->paginate(10);
 
-        return view('groups.index', ['groups' => $groups]);
+        return view('groups.index', compact('groups'));
     }
 
     /**
