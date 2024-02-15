@@ -34,9 +34,7 @@ class GroupController extends Controller
      */
     public function store(GroupRequest $request)
     {
-        $group = new Group();
-        $group->name = $request->input('name');
-        $group->save();
+        Group::create($request->validated());
 
         return redirect('groups')->with('success', 'Group added successfully');
     }
@@ -65,11 +63,9 @@ class GroupController extends Controller
      */
     public function update(GroupRequest $request, Group $group)
     {
+        $group->update($request->validated());
 
-        $group->name = $request->input('name');
-        $group->save();
-
-        return redirect('group')->with('success', 'Group edited successfully');
+        return redirect('groups')->with('success', 'Group edited successfully');
     }
 
     /**
@@ -99,6 +95,5 @@ class GroupController extends Controller
             ->get();
 
         return view('groups.show_table', compact('group', 'students', 'subjects', 'average_marks', 'averageTotalMarks'));
-
     }
 }

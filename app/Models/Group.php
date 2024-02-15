@@ -20,4 +20,8 @@ class Group extends Model
     {
         $query->orderby('name', 'asc');
     }
+
+    protected $fillable = [
+        'name',
+    ];
 }
