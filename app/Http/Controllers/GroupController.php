@@ -44,9 +44,9 @@ class GroupController extends Controller
      */
     public function show(Group $group)
     {
-        $student = Student::where('group_id', $group->id)->paginate(10);
+        $students = Student::where('group_id', $group->id)->paginate(10);
 
-        return view('groups.show', ['group_data' => $group->name, 'data' => $student, 'group' => $group]);
+        return view('groups.show', compact('students', 'group'));
     }
 
     /**

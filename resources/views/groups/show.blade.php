@@ -25,7 +25,7 @@
                 </tr>
             </thead>
             <tbody>
-              @foreach ($data as $student)
+              @foreach ($students as $student)
                 <tr class="bg-white border-b">
                     <th scope="row" class="px-6 py-4">
                         {{$student->id}}
@@ -34,7 +34,7 @@
                         <a href="/students/{{$student ->id}}">{{$student->first_name}} {{$student->last_name}}</a>
                     </td>
                     <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                        {{$group_data}}
+                        {{$group->name}}
                     </td>
                     <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                      <a href="/students/{{$student->id}}/edit">Edit</a>
@@ -45,6 +45,6 @@
         </table>
     </div>
     <div class="block mt-5">
-    {{ $data->links()}}
+    {{ $students->links()}}
     </div>
 </x-layout>
