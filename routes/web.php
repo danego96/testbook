@@ -72,7 +72,7 @@ Route::put('/students/{student}/marks/{mark}', [MarkController::class, 'update']
 
 Route::delete('/students/{student}/marks/{mark}', [MarkController::class, 'destroy'])->middleware('auth');
 
-Route::get('/groups/{group}/table', [GroupController::class, 'show_table']);
+Route::get('/groups/{group}/table', [GroupController::class, 'table']);
 
 Route::get('/register', [StudentController::class, 'register']);
 

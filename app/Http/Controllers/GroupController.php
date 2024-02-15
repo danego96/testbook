@@ -77,7 +77,7 @@ class GroupController extends Controller
         return redirect('groups')->with('error', 'Group deleted successfully');
     }
 
-    public function show_table(Group $group)
+    public function table(Group $group)
     {
         $students = Student::where('group_id', $group->id)->paginate(10);
         $subjects = Subject::all();
@@ -93,6 +93,6 @@ class GroupController extends Controller
             ->select('student_id', DB::raw('ROUND(AVG(name),1) as average'))
             ->get();
 
-        return view('groups.show_table', compact('group', 'students', 'subjects', 'average_marks', 'averageTotalMarks'));
+        return view('groups.table', compact('group', 'students', 'subjects', 'average_marks', 'averageTotalMarks'));
     }
 }
