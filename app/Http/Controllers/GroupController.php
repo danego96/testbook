@@ -83,7 +83,7 @@ class GroupController extends Controller
         $subjects = Subject::all();
 
         $studentIds = $students->pluck('id');
-        $average_marks = Mark::whereIn('student_id', $studentIds)
+        $averageMarks = Mark::whereIn('student_id', $studentIds)
             ->groupBy(['student_id', 'subject_id'])
             ->select('student_id', 'subject_id', DB::raw('ROUND(AVG(name),1) as average'))
             ->get();
@@ -93,6 +93,6 @@ class GroupController extends Controller
             ->select('student_id', DB::raw('ROUND(AVG(name),1) as average'))
             ->get();
 
-        return view('groups.table', compact('group', 'students', 'subjects', 'average_marks', 'averageTotalMarks'));
+        return view('groups.table', compact('group', 'students', 'subjects', 'averageMarks', 'averageTotalMarks'));
     }
 }
