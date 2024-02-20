@@ -15,7 +15,7 @@ class MarkController extends Controller
      */
     public function create(Student $student)
     {
-        $marks = range(5, 1);
+        $marks = Mark::valueList();
         $subjects = Subject::all();
 
         return view('marks.create', ['subjects' => $subjects, 'marks' => $marks, 'student' => $student]);
@@ -40,10 +40,9 @@ class MarkController extends Controller
      */
     public function edit(Student $student, Mark $mark)
     {
+        $marks = Mark::valueList();
 
-        $markList = range(5, 1);
-
-        return view('marks.edit', ['mark' => $mark, 'student' => $student, 'markList' => $markList]);
+        return view('marks.edit', compact('mark','student', 'marks'));
     }
 
     /**

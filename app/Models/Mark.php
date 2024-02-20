@@ -25,4 +25,9 @@ class Mark extends Model
         'subject_id',
         'student_id',
     ];
+
+    public static function valueList()
+    {
+        return range(5, 1);
+    }
 }
