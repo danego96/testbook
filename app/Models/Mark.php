@@ -19,4 +19,10 @@ class Mark extends Model
     {
         return $this->belongsTo(Subject::class);
     }
+
+    protected $fillable = [
+        'name',
+        'subject_id',
+        'student_id',
+    ];
 }

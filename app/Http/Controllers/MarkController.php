@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\MarkRequest;
 use App\Models\Mark;
 use App\Models\Student;
 use App\Models\Subject;
@@ -14,25 +15,23 @@ class MarkController extends Controller
      */
     public function create(Student $student)
     {
-        $mark = range(5, 1);
-        $subject = Subject::all();
+        $marks = range(5, 1);
+        $subjects = Subject::all();
 
-        return view('marks.create', ['data' => $subject, 'marks' => $mark, 'student' => $student]);
+        return view('marks.create', ['subjects' => $subjects, 'marks' => $marks, 'student' => $student]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, Student $student)
+    public function store(MarkRequest $request, Student $student)
     {
-        $mark = new Mark();
-        $mark->name = $request->input('name');
-        $mark->subject_id = $request->input('subject_id');
-        $mark->student_id = $student->id;
+        $mark = $request->validated();
+        $mark['student_id'] = $student->id;
 
-        $mark->save();
+        Mark::create($mark);
 
-        return redirect('/students/' . $student->id)->with('success', 'Mark has been updated');
+        return redirect('/students/' . $student->id)->with('success', 'Mark has been created');
 
     }
 
