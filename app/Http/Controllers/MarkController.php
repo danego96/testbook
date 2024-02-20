@@ -32,16 +32,8 @@ class MarkController extends Controller
 
         $mark->save();
 
-        return redirect('/students/'.$student->id)->with('success', 'Mark has been updated');
+        return redirect('/students/' . $student->id)->with('success', 'Mark has been updated');
 
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Mark $mark)
-    {
-        //
     }
 
     /**
@@ -65,7 +57,7 @@ class MarkController extends Controller
 
         $mark->save();
 
-        return redirect('/students/'.$student->id)->with('success', 'Mark has been updated');
+        return redirect('/students/' . $student->id)->with('success', 'Mark has been updated');
 
     }
 
@@ -76,6 +68,6 @@ class MarkController extends Controller
     {
         $mark->delete();
 
-        return redirect('/students/'.$student->id)->with('error', 'Mark has been deleted');
+        return redirect('/students/' . $student->id)->with('error', 'Mark has been deleted');
     }
 }
