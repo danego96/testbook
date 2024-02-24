@@ -7,7 +7,7 @@
                 <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                     Create an account
                 </h1>
-                <form class="space-y-4 md:space-y-6" method="POST" action="/students" enctype="multipart/form-data">
+                <form class="space-y-4 md:space-y-6" method="POST" action="/register" enctype="multipart/form-data">
                     @csrf
                     <div>
                         <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your name</label>
@@ -57,7 +57,7 @@
                     <select id="group" name="group_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                       <option selected>Choose a group</option>
                       @foreach ($data as $group)
-                      <option value="{{$group->id}}">{{$group->name}}</option>  
+                      <option value="{{$group->id}}">{{$group->name}}</option>
                       @endforeach
                     </select>
                        </div>
