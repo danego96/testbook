@@ -65,7 +65,7 @@ class StudentController extends Controller
             }
             $formFields ['image'] = $request ->file('image')->store('images', 'public');
         }
-          
+
 
         $formFields['password'] = bcrypt($formFields['password']);
 
@@ -134,13 +134,6 @@ class StudentController extends Controller
         return redirect('/students')->with('error', 'Student ' . $student->name . ' ' . $student->surname . ' has been deleted');
     }
 
-    public function register()
-    {
-        $group = Group::all();
-
-        return view('users.register', ['data' => $group]);
-    }
-
     public function logout(Request $request)
     {
         auth()->logout();
@@ -151,26 +144,6 @@ class StudentController extends Controller
         return redirect('/')->with('success', 'User has been logged out');
     }
 
-    public function login()
-    {
-        return view('users.login');
-    }
-
-    public function authenticate(Request $request)
-    {
-        $group = Group::all();
-
-        $formFields = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => 'required',
-
-        ]);
-        if (auth()->attempt($formFields)) {
-            $request->session()->regenerate();
-        }
-
-        return redirect()->route('profile', ['student' => auth()->user(), 'data' => $group])->with('success', 'User has been logged in');
-    }
 
     public function view_profile(Student $student)
     {
