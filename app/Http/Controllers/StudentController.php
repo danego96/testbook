@@ -121,7 +121,7 @@ class StudentController extends Controller
         }
         $student->save();
 
-        return redirect('/students')->with('success', 'Student details updated correctly');
+        return redirect('students')->with('success', 'Student details updated correctly');
     }
 
     /**
@@ -131,7 +131,7 @@ class StudentController extends Controller
     {
         $student->delete();
 
-        return redirect('/students')->with('error', 'Student ' . $student->name . ' ' . $student->surname . ' has been deleted');
+        return redirect('students')->with('error', "Student {$student->first_name} {$student->last_name}  has been deleted");
     }
 
     public function logout(Request $request)

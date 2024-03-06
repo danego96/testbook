@@ -25,6 +25,7 @@ class Student extends Authenticatable
     {
         return $this->hasMany(Mark::class);
     }
+
     protected $fillable = [
         'first_name',
         'last_name',
@@ -58,10 +59,9 @@ class Student extends Authenticatable
     protected static function booted()
     {
         static::deleting(function ($student) {
-            Storage::disk('public')->delete($student->image);
+            !is_null($student->image) && Storage::disk('public')->delete($student->image);
         });
     }
 
-  
 
 }
