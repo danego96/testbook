@@ -16,16 +16,6 @@ class Student extends Authenticatable
 {
     use HasApiTokens, Notifiable, HasFactory;
 
-    public function group(): BelongsTo
-    {
-        return $this->belongsTo(Group::class);
-    }
-
-    public function marks(): HasMany
-    {
-        return $this->hasMany(Mark::class);
-    }
-
     protected $fillable = [
         'first_name',
         'last_name',
@@ -63,5 +53,13 @@ class Student extends Authenticatable
         });
     }
 
+    public function group(): BelongsTo
+    {
+        return $this->belongsTo(Group::class);
+    }
 
+    public function marks(): HasMany
+    {
+        return $this->hasMany(Mark::class);
+    }
 }
