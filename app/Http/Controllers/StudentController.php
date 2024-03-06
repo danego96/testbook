@@ -134,17 +134,6 @@ class StudentController extends Controller
         return redirect('students')->with('error', "Student {$student->first_name} {$student->last_name}  has been deleted");
     }
 
-    public function logout(Request $request)
-    {
-        auth()->logout();
-
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-
-        return redirect('/')->with('success', 'User has been logged out');
-    }
-
-
     public function view_profile(Student $student)
     {
 
