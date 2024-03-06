@@ -24,7 +24,7 @@ class StudentFactory extends Factory
             'birth_date' => $this->faker->date('Y-m-d', '2004-01-01'),
             'email'  => $this->faker->email(),
             'password'  => $this->faker->password(),
-            'group_id' => Group::get()->random()->id,
+            'group_id' => Group::inRandomOrder()->value('id'),
 
         ];
     }
