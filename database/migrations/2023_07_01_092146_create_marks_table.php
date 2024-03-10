@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('marks', function (Blueprint $table) {
             $table->id();
-            $table->integer('student_id');
-            $table->integer('subject_id');
+            $table->foreignId('student_id')->constrained('students')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('subject_id')->constrained('subjects')->cascadeOnUpdate()->cascadeOnDelete();
             $table->integer('name');
             $table->timestamps();
         });
