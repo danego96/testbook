@@ -26,7 +26,7 @@ Route::get('/groups', [GroupController::class, 'index'])->name('groups');
 
 Route::get('/groups/create', [GroupController::class, 'create'])->middleware('auth');
 
-Route::post('/groups', [GroupController::class, 'store']);
+Route::post('/groups', [GroupController::class, 'store'])->name('groups.store');
 
 Route::get('/groups/{group}/edit', [GroupController::class, 'edit'])->middleware('auth');
 
