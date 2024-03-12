@@ -29,12 +29,15 @@
                 <tr class="bg-white  border-b">
                     <th scope="row"
                         class="px-6 py-4
-                            @foreach ($averageTotalMarks as $averageEachMark)
-                                @if ($averageEachMark->student_id === $student->id)
-                                    {{ $controllerInstance->showMarks($averageEachMark->average) }}
-                                @endif
-                               @endforeach
-
+                    @php
+                     $averageTotalMarkColor = match (true){
+                        $student->marks_avg_name == null => 'text-black-600',
+                        $student->marks_avg_name === '5.0000' => 'text-green-600',
+                        $student->marks_avg_name >= '4.0000' => 'text-yellow-600',
+                        $student->marks_avg_name < '4.0000' => 'text-red-600',
+                     }
+                    @endphp
+                    {{ $averageTotalMarkColor }}
             ">
                         {{ $student->first_name }} {{ $student->last_name }}
                     </th>
@@ -50,11 +53,7 @@
                     @endforeach
 
                     <td class="px-6 py-4">
-                        @foreach ($averageTotalMarks as $averageEachMark)
-                            @if ($averageEachMark->student_id === $student->id)
-                                {{ $averageEachMark->average }}
-                            @endif
-                        @endforeach
+                       {{ round(($student->marks_avg_name),1) }}
                     </td>
                 </tr>
             @endforeach
