@@ -29,19 +29,12 @@
                 <tr class="bg-white  border-b">
                     <th scope="row"
                         class="px-6 py-4
-                @foreach ($averageTotalMarks as $averageEachMark)
-                    @if ($averageEachMark->student_id === $student->id)
-                        @if ($averageEachMark->average === null)
-                            text-black-600
-                        @elseif ($averageEachMark->average === '5.0')
-                            text-green-600
-                        @elseif ($averageEachMark->average >= '4.0' && $averageEachMark->average < '5.0')
-                            text-yellow-600
-                        @elseif ($averageEachMark->average < '4.0')
-                            text-red-600
-                        @endif
-                    @endif
-               @endforeach
+                            @foreach ($averageTotalMarks as $averageEachMark)
+                                @if ($averageEachMark->student_id === $student->id)
+                                    {{ $controllerInstance->showMarks($averageEachMark->average) }}
+                                @endif
+                               @endforeach
+
             ">
                         {{ $student->first_name }} {{ $student->last_name }}
                     </th>

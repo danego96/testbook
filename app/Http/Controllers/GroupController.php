@@ -77,6 +77,15 @@ class GroupController extends Controller
         return redirect('groups')->with('error', 'Group deleted successfully');
     }
 
+    public function showMarks($average)
+    {
+        return match ($average) {
+            null => 'text-black-600',
+            '5.0' => 'text-green-600',
+            default => ($average >= '4.0') ? 'text-yellow-600' : 'text-red-600',
+        };
+    }
+
     public function table(Group $group)
     {
         $students = Student::where('group_id', $group->id)->paginate(10);
@@ -92,7 +101,9 @@ class GroupController extends Controller
             ->groupBy('student_id')
             ->select('student_id', DB::raw('ROUND(AVG(name),1) as average'))
             ->get();
+        $controllerInstance = $this;
 
-        return view('groups.table', compact('group', 'students', 'subjects', 'averageMarks', 'averageTotalMarks'));
+        return view('groups.table', compact('group', 'students', 'subjects', 'averageMarks', 'averageTotalMarks', 'controllerInstance'));
     }
 }
+
