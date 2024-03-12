@@ -10,7 +10,7 @@
                         <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Group Name</label>
                             <input type="text" name="name" id="имя"
                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                       placeholder="Enter your group name">
+                       placeholder="Enter your group name" value="{{ old('name') }}">
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
