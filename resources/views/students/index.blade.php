@@ -7,18 +7,18 @@
     </a>
     <form action="/students">
         <select name="SortBy" onchange="this.form.submit();">
-            <option value="default" {{ (request('SortBy') ?? 'default') === 'default' ? 'selected' : '' }}>Sort By</option>
-            <option value="name" {{ (request('SortBy') ?? 'default') === 'name' ? 'selected' : '' }}>Name</option>
-            <option value="birth_date" {{ (request('SortBy') ?? 'default') === 'birth_date' ? 'selected' : '' }}>Birth Date</option>
+            <option value="default" @if($sortBy === 'default') selected @endif>Sort By</option>
+            <option value="name" @if($sortBy === 'name') selected @endif>Name</option>
+            <option value="birth_date" @if($sortBy === 'birth_date') selected @endif>Birth Date</option>
         </select>
     </form>
-    
+
     <div class="relative overflow-x-auto">
         <table class="w-full mt-5 text-sm text-left text-gray-500">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                 <tr>
                     <th scope="col" class="px-6 py-3">
-                        Stundent ID
+                        Student ID
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Student Name
@@ -35,7 +35,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($data as $student)
+                @foreach ($students as $student)
                     <tr class="bg-white border-b">
                         <th scope="row" class="px-6 py-4">
                             {{ $student->id }}
@@ -63,7 +63,7 @@
         </table>
     </div>
     <div class="block mt-5">
-        {{ $data->links() }}
+        {{ $students->appends(['SortBy' => ($sortBy !== 'default' ? $sortBy : null)])->links() }}
 
     </div>
 </x-layout>

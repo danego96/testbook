@@ -19,16 +19,17 @@ class StudentController extends Controller
     public function index(Request $request)
     {
 
-        $student = Student::query();
+        $sortBy = $request->input('SortBy', 'default'); ;
+        $students = Student::query();
 
-        match ($request->SortBy) {
-            'name' => $student->orderBy('last_name', 'asc'),
-            'birth_date' => $student->orderBy('birth_date', 'asc'),
-            default => $student->orderBy('id', 'asc'),
+        match ($sortBy) {
+            'name' => $students->orderBy('last_name', 'asc'),
+            'birth_date' => $students->orderBy('birth_date', 'asc'),
+            default => $students->orderBy('id', 'asc'),
         };
         $group = Group::all();
 
-        return view('students.index', ['data' => $student->paginate(10), 'group_data' => $group]);
+        return view('students.index', ['students' => $students->paginate(10), 'group_data' => $group, 'sortBy' => $sortBy]);
     }
 
     /**
@@ -58,12 +59,12 @@ class StudentController extends Controller
 
         ]);
 
-        if($request->hasFile('image')){
+        if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('images', 'public');
             if (!$imagePath) {
                 return redirect()->back()->with('error', 'Failed to upload image.');
             }
-            $formFields ['image'] = $request ->file('image')->store('images', 'public');
+            $formFields ['image'] = $request->file('image')->store('images', 'public');
         }
 
 
