@@ -41,7 +41,8 @@
                             {{ $student->id }}
                         </th>
                         <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                            <a href="/students/{{ $student->id }}">{{ $student->last_name }} {{ $student->first_name }}
+                            <a href="/students/{{ $student->id }}">
+                                {{ $student->full_name }}
                             </a>
                         </td>
                         <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">

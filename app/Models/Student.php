@@ -62,4 +62,9 @@ class Student extends Authenticatable
     {
         return $this->hasMany(Mark::class);
     }
+
+    public function getFullNameAttribute()
+    {
+        return "{$this->first_name} {$this->last_name}";
+    }
 }
