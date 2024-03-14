@@ -44,10 +44,8 @@
 
                     @foreach ($subjects as $subject)
                         <td class="px-6 py-4">
-                            @foreach ($averageMarks as $averageMark)
-                                @if ($averageMark->subject_id === $subject->id && $averageMark->student_id === $student->id)
+                            @foreach ($averageMarks->where('subject_id', $subject->id)->where('student_id', $student->id) as $averageMark)
                                     {{ $averageMark->average }}
-                                @endif
                             @endforeach
                         </td>
                     @endforeach
