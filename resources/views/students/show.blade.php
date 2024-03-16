@@ -5,7 +5,9 @@
             class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-4xl">
             Student information </h1>
 
-            <img src="{{$student->image ? asset('storage/'.$student->image) : asset('images/no-image.jpg')}}">
+            <img src="{{$student->getStudentImage()}}">
+
+
 
         @foreach ($groups as $group)
             <p class="mb-3 text-gray-500"

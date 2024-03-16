@@ -22,6 +22,15 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
+Route::resources([
+    'groups' => GroupController::class,
+    'students' => StudentController::class,
+    'marks' => MarkController::class,
+    'subjects' =>SubjectController::class,
+]);
+
+Route::get('/groups/{group}/table', [GroupController::class, 'table']);
+/*
 Route::get('/groups', [GroupController::class, 'index'])->name('groups');
 
 Route::get('/groups/create', [GroupController::class, 'create'])->middleware('auth');
@@ -72,14 +81,4 @@ Route::put('/students/{student}/marks/{mark}', [MarkController::class, 'update']
 
 Route::delete('/students/{student}/marks/{mark}', [MarkController::class, 'destroy'])->middleware('auth');
 
-Route::get('/groups/{group}/table', [GroupController::class, 'table']);
-
-//Route::get('/register', [StudentController::class, 'register']);
-
-//Route::post('/logout', [StudentController::class, 'logout']);
-
-//Route::get('/login', [StudentController::class, 'login'])->name('login');
-
-//Route::post('/students/authenticate', [StudentController::class, 'authenticate']);
-
-Route::get('students/{student}/profile', [StudentController::class, 'view_profile'])->name('profile');
+Route::get('students/{student}/profile', [StudentController::class, 'view_profile'])->name('profile');*/
