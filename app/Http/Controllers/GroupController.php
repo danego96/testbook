@@ -14,6 +14,10 @@ class GroupController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index','show','table']);
+    }
     public function index()
     {
         $groups = Group::sortable()->paginate(10);

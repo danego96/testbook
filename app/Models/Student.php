@@ -67,4 +67,9 @@ class Student extends Authenticatable
     {
         return "{$this->first_name} {$this->last_name}";
     }
+
+    public function getStudentImage()
+    {
+      return $this->image ? Storage::url($this->image) : asset('images/no-image.jpg');
+    }
 }
