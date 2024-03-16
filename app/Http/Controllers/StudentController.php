@@ -20,7 +20,7 @@ class StudentController extends Controller
     {
 
         $sortBy = $request->input('SortBy', 'default'); ;
-        $students = Student::query();
+        $students = Student::with('group');
 
         match ($sortBy) {
             'name' => $students->orderBy('last_name', 'asc'),

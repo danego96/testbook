@@ -49,11 +49,7 @@
                             {{ $student->birth_date }}
                         </td>
                         <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                            @foreach ($group_data as $group_name)
-                                @if ($student->group_id == $group_name->id)
-                                    {{ $group_name->name }}
-                                @endif
-                            @endforeach
+                               {{ $student->group ->name }}
                         </td>
                         <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                             <a href="/students/{{ $student->id }}/edit">Edit</a>
