@@ -18,10 +18,10 @@ class GroupController extends Controller
     {
         $this->middleware('auth')->except(['index', 'show', 'table']);
     }
-    
+
     public function index()
     {
-        $groups = Group::sortaFFble()->paginate(10);
+        $groups = Group::sortable()->paginate(10);
 
         return view('groups.index', compact('groups'));
     }
@@ -49,7 +49,7 @@ class GroupController extends Controller
      */
     public function show(Group $group)
     {
-        $students = Student::where('group_id', $group->id)->paginate(10);
+        $students = $group->students()->paginate(10);
 
         return view('groups.show', compact('students', 'group'));
     }
