@@ -19,12 +19,13 @@ class StudentController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth')->except(['index','show']);
+        $this->middleware('auth')->except(['index', 'show']);
     }
+
     public function index(Request $request)
     {
 
-        $sortBy = $request->input('SortBy', 'default'); ;
+        $sortBy = $request->input('SortBy', 'default');;
         $students = Student::with('group');
 
         match ($sortBy) {
@@ -69,7 +70,7 @@ class StudentController extends Controller
             if (!$imagePath) {
                 return redirect()->back()->with('error', 'Failed to upload image.');
             }
-            $formFields ['image'] = $request->file('image')->store('images', 'public');
+            $formFields['image'] = $request->file('image')->store('images', 'public');
         }
 
 

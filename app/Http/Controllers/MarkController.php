@@ -15,8 +15,9 @@ class MarkController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth')->except(['index','show']);
+        $this->middleware('auth')->except(['index', 'show']);
     }
+
     public function create(Student $student)
     {
         $marks = Mark::valueList();
@@ -36,7 +37,6 @@ class MarkController extends Controller
         Mark::create($mark);
 
         return redirect('/students/' . $student->id)->with('success', 'Mark has been created');
-
     }
 
     /**
@@ -46,7 +46,7 @@ class MarkController extends Controller
     {
         $marks = Mark::valueList();
 
-        return view('marks.edit', compact('mark','student', 'marks'));
+        return view('marks.edit', compact('mark', 'student', 'marks'));
     }
 
     /**
@@ -60,7 +60,6 @@ class MarkController extends Controller
         $mark->save();
 
         return redirect('/students/' . $student->id)->with('success', 'Mark has been updated');
-
     }
 
     /**

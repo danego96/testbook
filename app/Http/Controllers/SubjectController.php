@@ -12,8 +12,9 @@ class SubjectController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth')->except(['index','show']);
+        $this->middleware('auth')->except(['index', 'show']);
     }
+    
     public function index()
     {
         $subject = Subject::sortable()->paginate(10);
@@ -76,6 +77,6 @@ class SubjectController extends Controller
     {
         $subject->delete();
 
-        return redirect('/subjects')->with('error', 'Subject '.$subject->name.' has been removed');
+        return redirect('/subjects')->with('error', 'Subject ' . $subject->name . ' has been removed');
     }
 }

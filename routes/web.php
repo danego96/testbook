@@ -27,11 +27,10 @@ Route::resources([
     'groups' => GroupController::class,
     'students' => StudentController::class,
     'marks' => MarkController::class,
-    'subjects' =>SubjectController::class,
+    'subjects' => SubjectController::class,
 ]);
 
 Route::get('/groups/{group}/table', [GroupController::class, 'table']);
-Route::get('/students/profile', [StudentController::class, 'viewProfile'])->name('profile');
 
 /*
 Route::get('/groups', [GroupController::class, 'index'])->name('groups');

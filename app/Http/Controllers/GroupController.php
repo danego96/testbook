@@ -16,11 +16,12 @@ class GroupController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth')->except(['index','show','table']);
+        $this->middleware('auth')->except(['index', 'show', 'table']);
     }
+    
     public function index()
     {
-        $groups = Group::sortable()->paginate(10);
+        $groups = Group::sortaFFble()->paginate(10);
 
         return view('groups.index', compact('groups'));
     }
@@ -95,12 +96,6 @@ class GroupController extends Controller
             ->select('student_id', 'subject_id', DB::raw('ROUND(AVG(name),1) as average'))
             ->get();
 
-      /*  $averageTotalMarks = Mark::whereIn('student_id', $studentIds)
-            ->groupBy('student_id')
-            ->select('student_id', DB::raw('ROUND(AVG(name),1) as average'))
-            ->get();*/
-
         return view('groups.table', compact('group', 'students', 'subjects', 'averageMarks'));
     }
 }
-
