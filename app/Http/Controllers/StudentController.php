@@ -78,7 +78,7 @@ class StudentController extends Controller
 
         $user = Student::create($formFields);
 
-        auth()->login($user);
+        /*auth()->login($user);*/
 
         return redirect()->route('profile', ['student' => auth()->user(), 'data' => $group])->with('success', 'User has been created');
     }

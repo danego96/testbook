@@ -17,10 +17,8 @@
            Group: {{ $group->name }}</p> @endif
                 @endforeach
             </p>
-            <a href="/students/{{ $student->id }}/marks/create">
-                <button type="button" action="/students/{{ $student->id }}/marks/create"
-                    class="block top-5 right-10 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 focus:outline-none">Add
-                    mark</button>
+            <a href="{{ route('students.marks.create', ['student' => $student->id]) }}">
+                <button type="button" class="block top-5 right-10 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 focus:outline-none">Add mark</button>
             </a>
             <table class="w-full mt-5 text-sm text-left text-gray-500">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50">
@@ -45,7 +43,7 @@
                             <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                             @foreach ($marks as $mark)
                                 @if ($mark->subject_id == $subject->id)
-                                        <a href="/students/{{ $student->id }}/marks/{{ $mark->id }}/edit">
+                                        <a href="{{ route('students.marks.edit', ['student' => $student->id, 'mark' => $mark->id]) }}">
                                             {{ $mark->name }}</a>
                                 @endif
                             @endforeach

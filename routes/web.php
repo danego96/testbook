@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
+
 Route::get('/students/profile', [StudentController::class, 'viewProfile'])->name('profile');
 
 Route::resources([
@@ -31,6 +32,13 @@ Route::resources([
 ]);
 
 Route::get('/groups/{group}/table', [GroupController::class, 'table']);
+
+Route::get('students/{student}/marks/create', [MarkController::class, 'create'])->name('students.marks.create');
+Route::post('students/{student}/marks', [MarkController::class, 'store'])->name('students.marks.store');
+Route::get('students/{student}/marks/{mark}/edit', [MarkController::class, 'edit'])->name('students.marks.edit');
+Route::put('students/{student}/marks/{mark}', [MarkController::class, 'update'])->name('students.marks.update');
+Route::delete('students/{student}/marks/{mark}', [MarkController::class, 'destroy'])->name('students.marks.destroy');
+
 
 /*
 Route::get('/groups', [GroupController::class, 'index'])->name('groups');

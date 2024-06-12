@@ -2,9 +2,9 @@
 <x-layout>
     <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl">Update
         mark</h1>
-
+        
     <div class="mt-10">
-        <form action="/students/{{$student->id}}/marks/{{$mark->id}}" method="POST">
+        <form action="{{ route('students.marks.update', ['student' => $student->id, 'mark' => $mark->id]) }}" method="POST">
             @csrf
             @method('PUT')
             <select id="name" name="name"
