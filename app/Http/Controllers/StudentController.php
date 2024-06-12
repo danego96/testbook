@@ -7,6 +7,7 @@ use App\Models\Group;
 use App\Models\Student;
 use App\Models\Subject;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -139,10 +140,17 @@ class StudentController extends Controller
         return redirect('students')->with('error', "Student {$student->first_name} {$student->last_name}  has been deleted");
     }
 
-    public function view_profile(Student $student)
+    public function viewProfile()
     {
+        $student = Auth::user();
+        $subject = Subject::all();
+        $groups = Group::all();
+        $mark = Mark::where('student_id', $student->id)->get();
+        $average = Mark::where('student_id', $student->id)
+            ->groupBy('subject_id')
+            ->select('subject_id', DB::raw('ROUND(AVG(name),1) as average'))
+            ->get();
 
-        $group = Group::all();
-        return view('students.profile', ['student' => $student, 'data' => $group]);
+        return view('students.profile', ['data' => $subject, 'student' => $student, 'groups' => $groups, 'marks' => $mark, 'average' => $average]);
     }
 }

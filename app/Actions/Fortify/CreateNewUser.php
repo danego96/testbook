@@ -29,13 +29,11 @@ class CreateNewUser implements CreatesNewUsers
 
         ])->validate();
 
-//        if(hasFile('image')){
-//            $imagePath = $request->file('image')->store('images', 'public');
-//            if (!$imagePath) {
-//                return redirect()->back()->with('error', 'Failed to upload image.');
-//            }
-//            $formFields ['image'] = $request ->file('image')->store('images', 'public');
-//        }
+        $imagePath = null;
+
+        if (isset($input['image'])) {
+            $imagePath = $input['image']->store('images', 'public');
+        }
 
         return Student::create([
             'first_name' => $input['first_name'],
@@ -44,7 +42,7 @@ class CreateNewUser implements CreatesNewUsers
             'password' => Hash::make($input['password']),
             'birth_date' => $input['birth_date'],
             'group_id' => $input['group_id'],
-
+            'image' => $imagePath,
         ]);
     }
 }
