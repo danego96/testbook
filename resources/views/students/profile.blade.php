@@ -37,7 +37,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach ($data as $subject)
+                @foreach ($subjects as $subject)
                     <tr class="bg-white border-b">
                         <th scope="row" class="px-6 py-4">
                             {{ $subject->name }}

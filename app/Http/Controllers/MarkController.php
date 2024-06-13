@@ -23,7 +23,7 @@ class MarkController extends Controller
         $marks = Mark::valueList();
         $subjects = Subject::all();
 
-        return view('marks.create', ['subjects' => $subjects, 'marks' => $marks, 'student' => $student]);
+        return view('marks.create', compact('subjects', 'marks', 'student'));
     }
 
     /**

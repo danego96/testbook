@@ -19,7 +19,7 @@
                 </tr>
             </thead>
             <tbody>
-              @foreach ($data as $subject)
+              @foreach ($subjects as $subject)
                 <tr class="bg-white border-b">
                     <th scope="row" class="px-6 py-4">
            {{$subject->id}}
@@ -36,7 +36,7 @@
         </table>
     </div>
     <div class="block mt-5">
-     {{ $data->links()}} 
+     {{ $subjects->links()}} 
 
     </div>
 </x-layout>

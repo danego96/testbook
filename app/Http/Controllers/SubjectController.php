@@ -17,9 +17,9 @@ class SubjectController extends Controller
     
     public function index()
     {
-        $subject = Subject::sortable()->paginate(10);
+        $subjects = Subject::sortable()->paginate(10);
 
-        return view('subjects.index', ['data' => $subject]);
+        return view('subjects.index', compact('subjects'));
     }
 
     /**
@@ -55,7 +55,7 @@ class SubjectController extends Controller
      */
     public function edit(Subject $subject)
     {
-        return view('subjects.edit', ['subject' => $subject]);
+        return view('subjects.edit', compact('subject'));
     }
 
     /**

@@ -34,8 +34,9 @@ class StudentController extends Controller
             default => $students->orderBy('id', 'asc'),
         };
         $group = Group::all();
+        $students = $students->paginate(10)->appends(['SortBy' => $sortBy]);
 
-        return view('students.index', ['students' => $students->paginate(10), 'group_data' => $group, 'sortBy' => $sortBy]);
+        return view('students.index', compact('students', 'group', 'sortBy'));
     }
 
     /**
@@ -43,9 +44,9 @@ class StudentController extends Controller
      */
     public function create()
     {
-        $group = Group::all();
+        $groups = Group::all();
 
-        return view('students.create', ['data' => $group]);
+        return view('students.create', compact('groups'));
     }
 
     /**
@@ -88,15 +89,15 @@ class StudentController extends Controller
      */
     public function show(Student $student)
     {
-        $subject = Subject::all();
+        $subjects = Subject::all();
         $groups = Group::all();
-        $mark = Mark::where('student_id', $student->id)->get();
+        $marks = Mark::where('student_id', $student->id)->get();
         $average = Mark::where('student_id', $student->id)
             ->groupBy('subject_id')
             ->select('subject_id', DB::raw('ROUND(AVG(name),1) as average'))
             ->get();
 
-        return view('students.show', ['subjects' => $subject, 'student' => $student, 'groups' => $groups, 'marks' => $mark, 'average' => $average]);
+        return view('students.show', compact('subjects', 'student', 'groups', 'marks', 'average'));
     }
 
     /**
@@ -105,9 +106,9 @@ class StudentController extends Controller
     public function edit(Student $student)
     {
 
-        $group = Group::all();
+        $groups = Group::all();
 
-        return view('students.edit', ['student' => $student, 'data' => $group]);
+        return view('students.edit', compact('student', 'groups'));
     }
 
     /**
@@ -144,14 +145,14 @@ class StudentController extends Controller
     public function viewProfile()
     {
         $student = Auth::user();
-        $subject = Subject::all();
+        $subjects = Subject::all();
         $groups = Group::all();
-        $mark = Mark::where('student_id', $student->id)->get();
+        $marks = Mark::where('student_id', $student->id)->get();
         $average = Mark::where('student_id', $student->id)
             ->groupBy('subject_id')
             ->select('subject_id', DB::raw('ROUND(AVG(name),1) as average'))
             ->get();
 
-        return view('students.profile', ['data' => $subject, 'student' => $student, 'groups' => $groups, 'marks' => $mark, 'average' => $average]);
+        return view('students.profile', compact('subjects', 'student', 'groups', 'marks', 'average'));
     }
 }
