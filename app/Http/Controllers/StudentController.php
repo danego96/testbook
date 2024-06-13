@@ -96,7 +96,7 @@ class StudentController extends Controller
             ->select('subject_id', DB::raw('ROUND(AVG(name),1) as average'))
             ->get();
 
-        return view('students.show', ['data' => $subject, 'student' => $student, 'groups' => $groups, 'marks' => $mark, 'average' => $average]);
+        return view('students.show', ['subjects' => $subject, 'student' => $student, 'groups' => $groups, 'marks' => $mark, 'average' => $average]);
     }
 
     /**
