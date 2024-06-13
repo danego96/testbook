@@ -36,7 +36,7 @@ class MarkController extends Controller
 
         Mark::create($mark);
 
-        return redirect('/students/' . $student->id)->with('success', 'Mark has been created');
+        return redirect()->route('students.show', ['student' => $student->id])->with('success', 'Mark has been created');
     }
 
     /**
@@ -59,7 +59,7 @@ class MarkController extends Controller
 
         $mark->save();
 
-        return redirect('/students/' . $student->id)->with('success', 'Mark has been updated');
+        return redirect()->route('students.show', ['student' => $student->id])->with('success', 'Mark has been updated');
     }
 
     /**
@@ -69,6 +69,6 @@ class MarkController extends Controller
     {
         $mark->delete();
 
-        return redirect('/students/' . $student->id)->with('error', 'Mark has been deleted');
+        return redirect()->route('students.show', ['student' => $student->id])->with('error', 'Mark has been deleted');
     }
 }
