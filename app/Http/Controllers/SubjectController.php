@@ -39,7 +39,7 @@ class SubjectController extends Controller
         $subject->name = $request->input('name');
         $subject->save();
 
-        return redirect('/subjects');
+        return redirect()->route('subjects.index');
     }
 
     /**
@@ -67,7 +67,7 @@ class SubjectController extends Controller
 
         $subject->update();
 
-        return redirect('/subjects')->with('success', 'Subject name has been successfully updated');
+        return redirect()->route('subjects.index')->with('success', 'Subject name has been successfully updated');
     }
 
     /**
@@ -77,6 +77,6 @@ class SubjectController extends Controller
     {
         $subject->delete();
 
-        return redirect('/subjects')->with('error', 'Subject ' . $subject->name . ' has been removed');
+        return redirect()->route('subjects.index')->with('error', 'Subject ' . $subject->name . ' has been removed');
     }
 }
