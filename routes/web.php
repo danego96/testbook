@@ -27,17 +27,20 @@ Route::get('/students/profile', [StudentController::class, 'viewProfile'])->name
 Route::resources([
     'groups' => GroupController::class,
     'students' => StudentController::class,
-    'marks' => MarkController::class,
     'subjects' => SubjectController::class,
 ]);
 
 Route::get('/groups/{group}/table', [GroupController::class, 'table']);
 
-Route::get('students/{student}/marks/create', [MarkController::class, 'create'])->name('students.marks.create');
-Route::post('students/{student}/marks', [MarkController::class, 'store'])->name('students.marks.store');
-Route::get('students/{student}/marks/{mark}/edit', [MarkController::class, 'edit'])->name('students.marks.edit');
-Route::put('students/{student}/marks/{mark}', [MarkController::class, 'update'])->name('students.marks.update');
-Route::delete('students/{student}/marks/{mark}', [MarkController::class, 'destroy'])->name('students.marks.destroy');
+/*Route::get('students/{student}/marks/create', [MarkController::class, 'create'])->name('students.marks.create');*/
+
+Route::controller(MarkController::class)->group(function() {
+    Route::get('students/{student}/marks/create', 'create')->name('students.marks.create');
+    Route::post('students/{student}/marks', 'store')->name('students.marks.store');
+    Route::get('students/{student}/marks/{mark}/edit','edit')->name('students.marks.edit');
+    Route::put('students/{student}/marks/{mark}', 'update')->name('students.marks.update');
+    Route::delete('students/{student}/marks/{mark}', 'destroy')->name('students.marks.destroy');
+});
 
 
 /*

@@ -31,10 +31,7 @@ class MarkController extends Controller
      */
     public function store(MarkRequest $request, Student $student)
     {
-        $mark = $request->validated();
-        $mark['student_id'] = $student->id;
-
-        Mark::create($mark);
+        $student->marks()->create($request->validated());
 
         return redirect()->route('students.show', ['student' => $student->id])->with('success', 'Mark has been created');
     }
