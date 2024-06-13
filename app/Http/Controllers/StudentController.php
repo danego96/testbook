@@ -80,7 +80,7 @@ class StudentController extends Controller
 
         /*auth()->login($user);*/
 
-        return redirect()->route('profile', ['student' => auth()->user(), 'data' => $group])->with('success', 'User has been created');
+        return redirect()->route('students.index')->with('success', 'User has been created');
     }
 
     /**
@@ -128,7 +128,7 @@ class StudentController extends Controller
         }
         $student->save();
 
-        return redirect('students')->with('success', 'Student details updated correctly');
+        return redirect()->route('students.index')->with('success', 'Student details updated correctly');
     }
 
     /**
@@ -138,7 +138,7 @@ class StudentController extends Controller
     {
         $student->delete();
 
-        return redirect('students')->with('error', "Student {$student->first_name} {$student->last_name}  has been deleted");
+        return redirect()->route('students.index')->with('error', "Student {$student->first_name} {$student->last_name}  has been deleted");
     }
 
     public function viewProfile()
